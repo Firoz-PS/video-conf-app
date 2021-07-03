@@ -1,0 +1,455 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210629.161550.29600.0.001.json",
+    "dumpEventTime": "2021-06-29T16:15:50Z",
+    "dumpEventTimeStamp": "1624963550341",
+    "processId": 29600,
+    "cwd": "D:\\web page development\\microsoft\\backend",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "app.js",
+      "app.js"
+    ],
+    "nodejsVersion": "v12.16.1",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.1",
+      "v8": "7.8.279.23-node.31",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.1/node-v12.16.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.1/node-v12.16.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.1/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18363",
+    "osVersion": "Windows 10 Home Single Language",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 20204937,
+        "nice": 0,
+        "sys": 22532015,
+        "idle": 187105828,
+        "irq": 4222531
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 18794375,
+        "nice": 0,
+        "sys": 12954890,
+        "idle": 198091828,
+        "irq": 999093
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 27761203,
+        "nice": 0,
+        "sys": 15157875,
+        "idle": 186922015,
+        "irq": 296750
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 18858250,
+        "nice": 0,
+        "sys": 9778953,
+        "idle": 201203859,
+        "irq": 169953
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 17567718,
+        "nice": 0,
+        "sys": 10954156,
+        "idle": 201319218,
+        "irq": 158468
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 14767437,
+        "nice": 0,
+        "sys": 8153625,
+        "idle": 206920031,
+        "irq": 123765
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 13498437,
+        "nice": 0,
+        "sys": 7663859,
+        "idle": 208678796,
+        "irq": 150343
+      },
+      {
+        "model": "AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  ",
+        "speed": 2096,
+        "user": 12595515,
+        "nice": 0,
+        "sys": 7965156,
+        "idle": 209280406,
+        "irq": 478140
+      }
+    ],
+    "host": "LAPTOP-NPAOJLGM"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff64ed319f9",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64ed35e1c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64ed34dd8",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64ee334cb",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f649f4e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f632021",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f4fe57c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f506521",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f4fbb13",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f4fa184",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f51b36d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64f280c51",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa94ddd",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64faff8b8",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa130bc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa130bc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa130bc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa130bc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff64fa19d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x0000027a55678601",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 17670144,
+    "totalCommittedMemory": 17670144,
+    "usedMemory": 16377032,
+    "availableMemory": 2182074624,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047456,
+        "used": 1047432,
+        "available": 24
+      },
+      "old_space": {
+        "memorySize": 11681792,
+        "committedMemory": 11681792,
+        "capacity": 11637272,
+        "used": 11195008,
+        "available": 442264
+      },
+      "code_space": {
+        "memorySize": 430080,
+        "committedMemory": 430080,
+        "capacity": 381088,
+        "used": 359360,
+        "available": 21728
+      },
+      "map_space": {
+        "memorySize": 1052672,
+        "committedMemory": 1052672,
+        "capacity": 1051200,
+        "used": 633200,
+        "available": 418000
+      },
+      "large_object_space": {
+        "memorySize": 3145728,
+        "committedMemory": 3145728,
+        "capacity": 3106440,
+        "used": 3106440,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047456,
+        "used": 0,
+        "available": 1047456
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 2.031,
+    "kernelCpuSeconds": 1,
+    "cpuConsumptionPercent": 0.589689,
+    "maxRss": 55414784,
+    "pageFaults": {
+      "IORequired": 24161,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 746,
+      "writes": 5
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "AMDRMSDKPATH": "C:\\Program Files\\AMD\\RyzenMasterSDK\\",
+    "APPDATA": "C:\\Users\\hp\\AppData\\Roaming",
+    "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_14300_QHPBUATUBKWVYQTJ",
+    "COLORTERM": "truecolor",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "LAPTOP-NPAOJLGM",
+    "ComSpec": "C:\\windows\\system32\\cmd.exe",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "GIT_ASKPASS": "c:\\Users\\hp\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\hp",
+    "LANG": "en_US.UTF-8",
+    "LOCALAPPDATA": "C:\\Users\\hp\\AppData\\Local",
+    "LOGONSERVER": "\\\\LAPTOP-NPAOJLGM",
+    "NUMBER_OF_PROCESSORS": "8",
+    "OneDrive": "C:\\Users\\hp\\OneDrive",
+    "OnlineServices": "Online Services",
+    "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+    "OS": "Windows_NT",
+    "Path": "C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\windows\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python38;C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python38\\Scripts;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Common Files\\Autodesk Shared\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python38\\Scripts\\;C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python38\\;C:\\Users\\hp\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\hp\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\hp\\AppData\\Roaming\\npm;C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin;D:\\Downloads\\opencv\\build\\x64\\vc15\\bin;",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL",
+    "platformcode": "KV",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+    "PROCESSOR_LEVEL": "23",
+    "PROCESSOR_REVISION": "1801",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PSExecutionPolicyPreference": "Bypass",
+    "PSModulePath": "C:\\Users\\hp\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "RegionCode": "APJ",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\windows",
+    "TEMP": "C:\\Users\\hp\\AppData\\Local\\Temp",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.56.2",
+    "TMP": "C:\\Users\\hp\\AppData\\Local\\Temp",
+    "USERDOMAIN": "LAPTOP-NPAOJLGM",
+    "USERDOMAIN_ROAMINGPROFILE": "LAPTOP-NPAOJLGM",
+    "USERNAME": "hp",
+    "USERPROFILE": "C:\\Users\\hp",
+    "VSCODE_GIT_ASKPASS_MAIN": "c:\\Users\\hp\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js",
+    "VSCODE_GIT_ASKPASS_NODE": "C:\\Users\\hp\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+    "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-e741993947-sock",
+    "windir": "C:\\windows"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\windows\\SYSTEM32\\ntdll.dll",
+    "C:\\windows\\System32\\KERNEL32.DLL",
+    "C:\\windows\\System32\\KERNELBASE.dll",
+    "C:\\windows\\System32\\WS2_32.dll",
+    "C:\\windows\\System32\\RPCRT4.dll",
+    "C:\\windows\\System32\\PSAPI.DLL",
+    "C:\\windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\windows\\System32\\ADVAPI32.dll",
+    "C:\\windows\\System32\\ucrtbase.dll",
+    "C:\\windows\\System32\\msvcrt.dll",
+    "C:\\windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\windows\\System32\\sechost.dll",
+    "C:\\windows\\SYSTEM32\\USERENV.dll",
+    "C:\\windows\\System32\\USER32.dll",
+    "C:\\windows\\System32\\profapi.dll",
+    "C:\\windows\\System32\\win32u.dll",
+    "C:\\windows\\System32\\GDI32.dll",
+    "C:\\windows\\System32\\gdi32full.dll",
+    "C:\\windows\\System32\\msvcp_win.dll",
+    "C:\\windows\\System32\\CRYPT32.dll",
+    "C:\\windows\\System32\\MSASN1.dll",
+    "C:\\windows\\System32\\bcrypt.dll",
+    "C:\\windows\\SYSTEM32\\WINMM.dll",
+    "C:\\windows\\SYSTEM32\\winmmbase.dll",
+    "C:\\windows\\System32\\cfgmgr32.dll",
+    "C:\\windows\\System32\\bcryptPrimitives.dll",
+    "C:\\windows\\System32\\IMM32.DLL",
+    "C:\\windows\\System32\\powrprof.dll",
+    "C:\\windows\\System32\\UMPDC.dll",
+    "C:\\windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\windows\\system32\\uxtheme.dll",
+    "C:\\windows\\System32\\combase.dll",
+    "C:\\windows\\system32\\mswsock.dll",
+    "C:\\windows\\System32\\kernel.appcore.dll",
+    "C:\\windows\\System32\\NSI.dll",
+    "C:\\windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\windows\\System32\\fwpuclnt.dll",
+    "C:\\windows\\system32\\napinsp.dll",
+    "C:\\windows\\system32\\pnrpnsp.dll",
+    "C:\\windows\\System32\\winrnr.dll",
+    "C:\\windows\\system32\\NLAapi.dll",
+    "C:\\windows\\system32\\wshbth.dll"
+  ]
+}
