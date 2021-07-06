@@ -2,20 +2,23 @@ const config = require("../config/authConfig");
 const User = require("../models/UserModel");
 const Call = require("../models/CallModel");
 const moment = require('moment');
+// const { removeItemFromArray }= require("../utils/removeItemFromArray")
 
 // function to start a new call
 const newCall = (req, res) => {
   const call = new Call({
-    name: req.body.name,  
+    callName: req.body.callName,  
     date: moment().format("dddd, MMMM Do YYYY"),
     startTime: moment().format("h:mm:ss a"),
     endTime: "",
     hostUserId: req.userId,
-    connectionId: req.body.connectionId,
     isActive: true,
     participants: [
         {
             userId: req.userId,
+            userSocketId: req.body.mySocketId,
+            userName: req.body.myName,
+            userStream: "",
             isPresent: true,
             joinTime: moment().format("h:mm:ss a"),
             leftTime: "" 
@@ -27,7 +30,7 @@ const newCall = (req, res) => {
     .then(
       res.status(200).send({
         message: "call started successfully",
-        callId: call.id
+        call: call
       }) 
     )
     .catch(err =>{
@@ -41,23 +44,126 @@ const joinCall = (req, res) => {
     Call.findById(req.params.id)
         .then(call => {
             if(call.isActive){
-                call.participants.push({
+                const participant = {
                     userId: req.userId,
+                    userSocketId: req.body.mySocketId,
+                    userName: req.body.myName,
+                    userStream: "",
                     isPresent: true,
                     joinTime: moment().format("h:mm:ss a"),
-                    leftTime: ""
-                })
+                    leftTime: "" 
+                }
+                call.participants.push(participant)
                 call.save()
                 .then(
                     res.status(200).send({
                         message: "Join request Sent",
-                        connectionId: Call.connectionId
+                        call: call
                     })
                 )
                 .catch(err =>{
-                    res.status(500).send({message: "failed to sent join request"})
+                    res.status(500).send({message: "Accepted the request to join"})
                     console.log(err)
                 })
+            }
+            else {
+                res.status(404).send({mesaage: "call has ended"})
+            }
+        })
+        .catch(err =>{
+            res.status(404).send({message: "Call not found"})
+            console.log(err)
+        })    
+}
+
+// function to answer a call
+// const answerCall = (req, res) => {
+//     Call.findById(req.params.id)
+//         .then(call => {
+//             if(call.isActive){
+//                 call.participants.push({
+//                     userId: req.body.userId,
+//                     userSocketId: req.body.userSocketId,
+//                     isPresent: true,
+//                     joinTime: moment().format("h:mm:ss a"),
+//                     leftTime: ""
+//                 })
+//                 call.save()
+//                 .then(
+//                     res.status(200).send({
+//                         message: "Join request Sent",
+//                         connectionId: Call.connectionId
+//                     })
+//                 )
+//                 .catch(err =>{
+//                     res.status(500).send({message: "Accepted the request to join"})
+//                     console.log(err)
+//                 })
+//             }
+//             else {
+//                 res.status(404).send({mesaage: "call has ended"})
+//             }
+//         })
+//         .catch(err =>{
+//             res.status(404).send({message: "Call not found"})
+//             console.log(err)
+//         })    
+// }
+
+
+
+// function to reject a call
+const rejectJoinRequest = (req, res) => {
+    Call.findById(req.params.id)
+        .then(call => {
+            if(call.isActive){
+                const initialLength = call.participants.length
+                console.log(call.participants)
+                console.log(req.body.participantUserId)
+                call.participants.splice(call.participants.findIndex(participant =>
+                    participant.userId === req.body.participantUserId), 1
+                    )
+                    console.log(call.participants)
+                call.save()
+                    if(call.participants.length != initialLength){
+                        res.status(200).send({
+                            message: "Successfully rejected the join request",
+                        })
+                    }
+                    else{
+                        res.status(404).send({message: "Participant not found"})
+                    }
+                }           
+            else {
+                res.status(404).send({mesaage: "call has ended"})
+            }
+        })
+        .catch(err =>{
+            res.status(404).send({message: "Call not found"})
+            console.log(err)
+        })    
+}
+
+// function to answer call
+const acceptJoinRequest = (req, res) => {
+    var newParticipant ={}
+    Call.findById(req.params.id)
+        .then(call => {
+            if(call.isActive){
+                call.participants.map((participant) =>{
+                    if(participant.userId == req.body.participantUserId){
+                        newParticipant = participant
+                    } 
+                })
+                if(newParticipant == {}){
+                    res.status(404).send({message: "Participant not found"})
+                }
+                else {
+                    res.status(200).send({
+                        message: "Successfully accepted the request to join",
+                        participant: newParticipant
+                    })
+                }
             }
             else {
                 res.status(404).send({mesaage: "call has ended"})
@@ -157,7 +263,7 @@ const getAllCallDetails = (req, res) => {
             if(call.hostUserId === req.userId || call.participants.findOne({userId : req.userId})){
                 allCalls.push({
                     callId: call.id, 
-                    name: call.name,
+                    callName: call.callName,
                     date: call.date,
                     startTime: call.startTime,
                     endTime: call.endTime,
@@ -181,6 +287,8 @@ const getAllCallDetails = (req, res) => {
 module.exports = {
   newCall,
   joinCall,
+  acceptJoinRequest,
+  rejectJoinRequest,
   leaveCall,
   endCall,
   getAllCallDetails

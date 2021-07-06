@@ -13,6 +13,8 @@ router.use(function(req, res, next) {
 
 router.post("/start", [authJwt.verifyToken], CallController.newCall);
 router.put("/join/:id", [authJwt.verifyToken], CallController.joinCall);
+router.get("/answer/:id", [authJwt.verifyToken], CallController.acceptJoinRequest);
+router.put("/reject/:id", [authJwt.verifyToken], CallController.rejectJoinRequest);
 router.put("/leave/:id", [authJwt.verifyToken], CallController.leaveCall);
 router.put("/end/:id", [authJwt.verifyToken], CallController.endCall);
 router.get("/", [authJwt.verifyToken], CallController.getAllCallDetails);

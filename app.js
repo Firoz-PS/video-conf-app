@@ -36,18 +36,22 @@ const io = require("socket.io")(server, {
 app.use(cors());
 
 io.on("connection", (socket) => {
-    socket.emit("me", socket.id);
+    // socket.emit("mySocketId", socket.id);
 
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")
 	});
 
-	socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-		io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+	socket.on("callUser", ({ userToCall, signalData, from, myName, myUserId }) => {
+		io.to(userToCall).emit("callUser", { signal: signalData, from, myName, myUserId });
 	});
 
 	socket.on("answerCall", (data) => {
-		io.to(data.to).emit("callAccepted", data.signal)
+		io.to(data.to).emit("callAccepted", {signal: data.signal, myName: data.myName})
+	});
+
+	socket.on("rejectCall", (data) => {
+		io.to(data.to).emit("callRejected")
 	});
 });
 

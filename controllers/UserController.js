@@ -106,7 +106,7 @@ const signin = (req, res) => {
     })
 }
 
-// function to fetch details of a user using th id passed as a path param
+// function to fetch details of a user using the id passed as a path param
 const fetchUser = (req, res) =>{
   User.findById(req.params.id)
     .then(user => {
