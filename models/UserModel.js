@@ -19,16 +19,7 @@ const User = mongoose.model(
     accessToken: String,
     isDeleted: Boolean,
     isOnline: Boolean,
-    contactInfos: [
-      {
-        contactId: String,
-        chatId: String,
-        contactName: String,
-        contactAvatar: String,
-        isContactOnline: Boolean,
-        lastChatTime: String
-      }
-    ]
+    contactInfosId: String
   })
 );
 

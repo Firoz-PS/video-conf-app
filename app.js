@@ -42,12 +42,20 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit("callEnded")
 	});
 
+	socket.on("messageSent", () => {
+		socket.broadcast.emit("updateChat")
+	});
+
+	socket.on("contactListUpdated", () => {
+		socket.broadcast.emit("updateContact")
+	});
+
 	socket.on("callUser", ({ userToCall, signalData, from, myName, myUserId }) => {
 		io.to(userToCall).emit("callUser", { signal: signalData, from, myName, myUserId });
 	});
 
-	socket.on("answerCall", (data) => {
-		io.to(data.to).emit("callAccepted", {signal: data.signal, myName: data.myName})
+	socket.on("answerCall", ({to, signal, myName, myId, myAvatar}) => {
+		io.to(to).emit("callAccepted", {signal, myName, myId, myAvatar})
 	});
 
 	socket.on("rejectCall", (data) => {

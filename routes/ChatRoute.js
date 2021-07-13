@@ -11,9 +11,8 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.post("/", [authJwt.verifyToken], ChatController.newChat)
-router.get("/:id", [authJwt.verifyToken], ChatController.fetchChat);
-router.put("/:id", [authJwt.verifyToken], ChatController.updateChat);
+router.get("/:id", [authJwt.verifyToken], ChatController.fetchChat); //used
+router.put("/:id", [authJwt.verifyToken], ChatController.updateChat); //used
 router.put("/delete/:id", [authJwt.verifyToken], ChatController.deleteChat);
 
 

@@ -8,7 +8,7 @@ router.get("/ping", function (req, res) {
 /* Basic Authentication */
 router.use('/user', require('./UserRoute'));
 router.use('/call', require('./CallRoute'));
-// router.use('/chat', require('./ChatRoute'));
-// router.use('/todo', require('./TodoRoute'));
+router.use('/chat', require('./ChatRoute'));
+router.use('/contacts', require('./ContactRoute'));
 
 module.exports = router;

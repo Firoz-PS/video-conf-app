@@ -1,17 +1,58 @@
 const config = require("../config/authConfig");
 const User = require("../models/UserModel");
 const fs = require("fs");
+const {initContact, isUserAContact} = require("./Contactcontroller")
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+//function to fetch the contactInfosId of a user with the user Id passed as argument
+const getContactInfosId = async (userId) => {
+  const user = await User.findById(userId)
+
+  if (user) {
+    return user.contactInfosId
+  } else {
+    console.log("user not found");
+    return;
+  }
+};
+
+// function to search for a contact
+const searchUser = async (req, res) => {
+  const searchResult=[]
+  var isContact = false
+  User.findOne({ 
+    email: req.body.searchValue
+  })
+    .then(async (user) => {
+       isContact = await isUserAContact(req.body.contactInfosId, user._id)
+          searchResult.push({
+            userId: user._id,
+            userName: `${user.firstName} ${user.lastName}`,
+            avatar: user.avatar,
+            isUserAContact: isContact
+          })
+          res.status(200).send({
+            searchResult
+          }) 
+        })
+        .catch(err => {
+          res.status(404).send({ message: "User Not found." });
+          console.log(err)
+        })
+      }
+
 // function to create a new user while signing up
-const signup = (req, res) => {
+const signup = async(req, res) => {
+  const contactInfosId = await initContact()
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    phoneNo:"",
+    phoneNo: "",
+    organization: "",
+    dateOfBirth: "",
     password: bcrypt.hashSync(req.body.password, 8),
     avatar: "",
     theme: "dark",
@@ -19,7 +60,7 @@ const signup = (req, res) => {
     accessToken:"",
     isDeleted: false,
     isOnline: true,
-    contactInfos: [],
+    contactInfosId: contactInfosId,
   });
   const token = jwt.sign({ id: user.id }, config.secret, {
     expiresIn: 86400 // 24 hours
@@ -37,10 +78,13 @@ const signup = (req, res) => {
           lastName: user.lastName,
           email: user.email,
           phoneNo: user.phoneNo,
+          organization: user.organization,
+          dateOfBirth: user.dateOfBirth,
           theme: user.theme,
           color: user.color,
           avatar: user.avatar,
-          isOnline: user.isOnline
+          isOnline: user.isOnline,
+          contactInfosId: user.contactInfosId
         }]
       }) 
     )
@@ -83,10 +127,13 @@ const signin = (req, res) => {
                   lastName: user.lastName,
                   email: user.email,
                   phoneNo: user.phoneNo,
+                  organization: user.organization,
+                  dateOfBirth: user.dateOfBirth,
                   avatar: user.avatar,
                   theme: user.theme,
                   color: user.color,
-                  isOnline: user.isOnline
+                  isOnline: user.isOnline,
+                  contactInfosId: user.contactInfosId
                 }]
               })
             )
@@ -112,14 +159,18 @@ const fetchUser = (req, res) =>{
     .then(user => {
       if(!user.isDeleted){
         res.status(200).send({
-          res,
-          id: user._id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          phoneNo: user.phoneNo,
-          avatar: user.avatar,
-          isOnline: user.isOnline
+          message: "user found successfully",
+          user: {
+            id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            phoneNo: user.phoneNo,
+            organization: user.organization,
+            dateOfBirth: user.dateOfBirth,
+            avatar: user.avatar,
+            isOnline: user.isOnline,
+          }
         })    
       }
       else {
@@ -128,27 +179,28 @@ const fetchUser = (req, res) =>{
     })
     .catch(err => {
       res.status(404).send({ message: "User Not found." });
-      console.log(err)
+      console.log("here",err)
     })
-}
-
+  }
+  
 // function to fetch profile details
 const fetchProfile = (req, res) =>{
   User.findById(req.userId)
-    .then(user => {
-      if(!user.isDeleted){
-        res.status(200).send({
-          user: {
-            id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            phoneNo: user.phoneNo,
-            theme: user.theme,
-            color: user.color,
-            avatar: user.avatar,
-            isOnline: user.isOnline
-          }
+  .then(user => {
+    if(!user.isDeleted){
+      res.status(200).send({
+        user: {
+          id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phoneNo: user.phoneNo,
+          organization: user.organization,
+          dateOfBirth: user.dateOfBirth,
+          avatar: user.avatar,
+          isOnline: user.isOnline,
+          contactInfosId: user.contactInfosId
+        }
         })
       }
       else {
@@ -215,15 +267,19 @@ const updateUser = (req, res) => {
         break;
 
     case "BASIC": 
-      User.findById(req.params.id)
+      User.findById(req.userId)
         .then(user => {
           user.firstName = req.body.firstName;
           user.lastName = req.body.lastName;
           user.phoneNo = req.body.phoneNo;
-          user.avatar = req.body.avatar;
+          user.organization = req.body.organization;
+          user.dateOfBirth = req.body.dateOfBirth;
           user.save()
             .then(
-              res.status(200).send({message: "user updated successfully"})
+              res.status(200).send({
+                message: "user updated successfully",
+                user
+              })
             )
             .catch(err =>{
               res.status(500).send({message: "failed to update user"})
@@ -232,30 +288,30 @@ const updateUser = (req, res) => {
         })
         break;
 
-    case "CONTACT": 
-      User.findById(req.params.id)
-        .then(user => {
-          user.contactInfos.push({
-            contactId: req.body.contactId,
-            chatId: req.body.chatId,
-            contactName: req.body.contactName,
-            contactAvatar: req.body.contactAvatar,
-            isContactOnline: req.body.isContactOnline ,
-            lastChatTime: req.body.lastChatTime         
-          })
-          user.save()
-            .then(
-              res.status(200).send({message: "user contacts updated successfully"})
-            )
-            .catch(err =>{
-              res.status(500).send({message: "failed to update user contacts"})
-              console.log(err)
-            })
-        })
-        break;    
+    // case "CONTACT": 
+    //   User.findById(req.params.id)
+    //     .then(user => {
+    //       user.contactInfos.push({
+    //         contactId: req.body.contactId,
+    //         chatId: req.body.chatId,
+    //         contactName: req.body.contactName,
+    //         contactAvatar: req.body.contactAvatar,
+    //         isContactOnline: req.body.isContactOnline ,
+    //         lastChatTime: req.body.lastChatTime         
+    //       })
+    //       user.save()
+    //         .then(
+    //           res.status(200).send({message: "user contacts updated successfully"})
+    //         )
+    //         .catch(err =>{
+    //           res.status(500).send({message: "failed to update user contacts"})
+    //           console.log(err)
+    //         })
+    //     })
+    //     break;    
 
     case "PASSWORD": 
-      User.findById(req.params.id)
+      User.findById(req.userId)
         .then(user => {
           const isPasswordValid = bcrypt.compareSync(
             req.body.oldPassword,
@@ -265,7 +321,7 @@ const updateUser = (req, res) => {
             res.status(401).send({ message: "Invalid Password! , failed to update password"});
           }
           else {
-            user.password = req.body.newPassword;
+            user.password = bcrypt.hashSync(req.body.newPassword, 8);
             user.save()
             .then(
               res.status(200).send({message: "Password updated successfully"})
@@ -310,7 +366,7 @@ const updateAvatar = (req, res) => {
 
 // function to delete the user
 const deleteUser = (req, res) => {
-  User.findById(req.body.id)
+  User.findById(req.userId)
     .then(user => {
       if(!user.isDeleted){
         const isPasswordValid = bcrypt.compareSync(
@@ -341,6 +397,8 @@ const deleteUser = (req, res) => {
 }
 
 module.exports = {
+  getContactInfosId,
+  searchUser,
   signup,
   signin,
   signout,

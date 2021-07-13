@@ -118,8 +118,6 @@ const rejectJoinRequest = (req, res) => {
         .then(call => {
             if(call.isActive){
                 const initialLength = call.participants.length
-                console.log(call.participants)
-                console.log(req.body.participantUserId)
                 call.participants.splice(call.participants.findIndex(participant =>
                     participant.userId === req.body.participantUserId), 1
                     )
