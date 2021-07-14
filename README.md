@@ -1,9 +1,8 @@
 <h1>Microsoft Teams Clone</h1>
 
-![Screenshot (1535)](https://user-images.githubusercontent.com/67138216/125674023-65d19767-3031-49fd-ab26-0389c96c501f.png)
-
-
 <p>Microsoft teams clone is created as a part of Microsft Engage 2021. Through this app you can have a video call with another user, chat in realtime and update your  profile</p>
+
+![Screenshot (1535)](https://user-images.githubusercontent.com/67138216/125674023-65d19767-3031-49fd-ab26-0389c96c501f.png)
 
 <h2>Tech Stack</h2>
 <ul>
@@ -11,79 +10,43 @@
    <li>Node.js</li>
    <li>Express</li>
    <li>Mongodb Atlas</li>
+   <li>WebRTC</li>
+   <li>Socket.io</li>
 </ul>
-<h2>Tech Stack</h2>
+<h2>Features</h2>
 <ul>
   <li>User SignIn and SignUp
     <ul>
-      <li>Implemented signIn and signUp using JWT authentication</li>
+      <li>Implemented signIn, signUp and signOut with JWT authentication</li>
       <li>Access token refreshes every 24 hours</li>
     </ul>
   </li>
-  <li>Forms
+  <li>Video Conferencing
     <ul>
-      <li>Basic</li>
-      <li>Rich text editor</li>
+      <li>One to one live video calls</li>
+      <li>Mute or unmute mic and video turn on or turn off</li>
+      <li>Chat during meeting</li>
     </ul>
   </li>
-  <li>eChart</li>
-  <li>Session pages
+  <li>Chat Box
     <ul>
-      <li>Sign in</li>
-      <li>Sign up</li>
-      <li>Forgot password</li>
-      <li>Error page</li>
+      <li>Real time chat, where a user can send and recive messages from another user</li>
     </ul>
   </li>
-  <li>Drag and drop</li>
-  <li>Google map</li>
-  <li>Utilities
+  <li>Contacts Management
     <ul>
-      <li>Color</li>
-      <li>Spacing</li>
-      <li>Typography</li>
-      <li>Display</li>
+      <li>View users added to the contacts</li>
+      <li>Send or receive invites</li>
+      <li>View user details</li>
     </ul>
   </li>
-  <li>Multi level menu</li>
-</ul>
-
-<h2>Pro features</h2>
-<ul>
-  <li>Horizontal navigation</li>
-  <li>Forms
+  <li>User Details Updation
     <ul>
-      <li>Single upload</li>
-      <li>Multiple upload</li>
-      <li>Wizard</li>
+      <li>Update or add more details which were not collected while signing up</li>
     </ul>
-  </li>
-  <li>Working Apps
-    <ul>
-      <li>CRUD table</li>
-      <li>Shop/eCommerce</li>
-      <li>Scrum board</li>
-      <li>Infinite list</li>
-      <li>Invoice builder</li>
-      <li>Event calendar</li>
-      <li>Chat</li>
-      <li>Inbox</li>
-      <li>Todo</li>
-    </ul>
-  </li>
-  <li>Charts
-    <ul>
-      <li>eChart</li>
-      <li>Rechart</li>
-      <li>Victory chart</li>
-      <li>React vis</li>
-    </ul>
-  </li>
- 
-
-  <li>User profile</li>
-  <li>Plans & pricing</li>
-  <li>Support</li>
+  </li> 
+  <li>Change Password</li>
+  <li>Delete Account</li>
 </ul>
 
 <h2 id="availablescripts">Getting started</h2>
