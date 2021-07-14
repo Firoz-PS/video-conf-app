@@ -17,12 +17,6 @@ app.get("/", (req, res) => {
 	res.json({ message: "Server Running" });
 });
 
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'text/plain');
-//   res.end('Server Running');
-// });
-
 // socket connection for video call
 const server = http.createServer(app);
 
@@ -36,7 +30,6 @@ const io = require("socket.io")(server, {
 app.use(cors());
 
 io.on("connection", (socket) => {
-    // socket.emit("mySocketId", socket.id);
 
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")

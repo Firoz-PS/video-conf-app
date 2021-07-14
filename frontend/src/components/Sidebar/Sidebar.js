@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
+
+// material UI
 import { Drawer, IconButton, List } from "@material-ui/core";
 import {
   VideoCall as CallIcon,
@@ -9,7 +12,6 @@ import {
   Contacts as ContactsIcon,
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
-import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 
 // styles
@@ -66,11 +68,11 @@ function Sidebar({ location }) {
   var classes = useStyles();
   var theme = useTheme();
 
-  // global
+  // global state
   var { isSidebarOpened } = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
 
-  // local
+  // local state
   var [isPermanent, setPermanent] = useState(true);
 
   useEffect(function() {

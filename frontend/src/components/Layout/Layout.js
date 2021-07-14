@@ -1,8 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {
   Route,
   Switch,
-  Redirect,
   withRouter,
 } from "react-router-dom";
 import classnames from "classnames";
@@ -28,7 +27,6 @@ import { useLayoutState } from "../../context/LayoutContext";
 function Layout(props) {
   var classes = useStyles();
 
-  // global
   var layoutState = useLayoutState();
 
   return (

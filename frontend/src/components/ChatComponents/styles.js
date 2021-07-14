@@ -1,12 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
-  // cardBody: {
-  //   height: "100%"
-  // },  
-  header: {
-    // backgroundColor: theme.palette.primary.light,
-  },
   chatBoxContent: {
     height: "75vh",
     position: "relative"  

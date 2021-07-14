@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
   Paper: {
     display: "flex",
     position: "relative"
-    //minHeight: "100%",  
   },
   callBottomBar: {
     display: "flex",
@@ -41,9 +40,6 @@ const useStyles = makeStyles(theme => ({
       padding: "0 4px"
 
   },
-  // root: {
-  //   width: '100%',
-  // },
   container: {
     maxHeight: 440,
   },

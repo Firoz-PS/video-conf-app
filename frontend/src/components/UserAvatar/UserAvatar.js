@@ -1,11 +1,11 @@
 import React from "react";
+
+// material UI
 import { useTheme } from "@material-ui/styles";
+import { Typography } from "@material-ui/core";
 
 // styles
 import useStyles from "./styles";
-import { Typography } from "@material-ui/core";
-
-// components
 
 export default function UserAvatar({ color = "primary", ...props }) {
   var classes = useStyles();

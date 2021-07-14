@@ -1,18 +1,16 @@
 import { useState, useContext } from 'react';
+
+// material UI
 import {
   Box,
   Button,
   Card,
   CardContent,
   CardHeader,
-  CardActions,
   Divider,
   Grid,
   TextField,
-  Typography,
-  Avatar,
   IconButton,
-  Input
 } from '@material-ui/core';
 import {
   Edit as EditIcon ,
@@ -26,7 +24,11 @@ import useStyles from "./styles";
 
 const UpdateDetails = () => {
   const classes = useStyles()
+
+  // global state
   const { user, updateBasicDetails } = useContext(UserContext)
+
+  // local state
   const initialState = {
     firstName: `${user.firstName}`,
     lastName: `${user.lastName}`,
@@ -38,6 +40,7 @@ const UpdateDetails = () => {
   const [values, setValues] = useState(initialState);
   const [isEditing, setIsEditing] = useState(false)
 
+  // function to change the values in the 'values' state
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -45,11 +48,13 @@ const UpdateDetails = () => {
     });
   };
 
+  // function to cancel update details change operation
   const handleCancel =() => {
     setValues(initialState)
     setIsEditing(false)
   }
 
+  // function to confirm details change
   const handleSaveDetails = () => {
     updateBasicDetails(values)
   }

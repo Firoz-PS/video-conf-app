@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+// material UI
 import {
   Collapse,
   Divider,
@@ -9,13 +12,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Inbox as InboxIcon } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
-
-// components
 
 export default function SidebarLink({
   link,
@@ -29,7 +29,7 @@ export default function SidebarLink({
 }) {
   var classes = useStyles();
 
-  // local
+  // local state
   var [isOpen, setIsOpen] = useState(false);
   var isLinkActive =
     link &&

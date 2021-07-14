@@ -1,34 +1,28 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
+
+// material UI
 import {
-  Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
-  CardActions,
   Divider,
-  Grid,
-  TextField,
   Typography,
-  Avatar,
-  IconButton,
-  Input
 } from '@material-ui/core';
-import {
-  Edit as EditIcon ,
-} from "@material-ui/icons";
 
 // contexts
 import UserContext from "../../context/AuthContext";
 
 // styles
 import useStyles from "./styles";
+
+// components
 import UserAvatar from '../UserAvatar/UserAvatar';
 
 const UpdateAvatar = () => {
   const classes = useStyles()
-  const { user, updateAvatar } = useContext(UserContext)
-  const [avatar, setAvatar] = useState(user.avatar)
+
+  // global state
+  const { user } = useContext(UserContext)
 
   return (
       <Card>

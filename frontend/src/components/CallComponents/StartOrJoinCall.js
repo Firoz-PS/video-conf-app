@@ -1,11 +1,10 @@
 import React from "react";
-import { useState, useContext, useEffect } from "react";
-import UserContext from "../../context/AuthContext";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+
+// material UI
 import {
   Grid,
-  Paper,
-  Input,
   Button,
   Card,
   CardHeader,
@@ -14,32 +13,29 @@ import {
   CardActions,
   TextField,
 } from "@material-ui/core";
+
+// redux
 import { useDispatch, useSelector } from "react-redux";
 import { startCall, joinCall } from "../../redux/actions/CallActions";
+
+// context
 import { socket } from "../../context/AuthContext";
+import UserContext from "../../context/AuthContext";
 
-// styles
-import useStyles from "./styles";
-
-export default function CallStarter({
-  mySocketId,
-  callAccepted,
-  name,
-  setName,
-  callEnded,
-  leaveCall,
-  callUser,
-}) {
-  var classes = useStyles();
+export default function CallStarter() {
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);
+  const history = useHistory();
+
+  // global state
   const { CallList } = useSelector((state) => state.calls);
-  // const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
+
+  // local state
   const [callId, setCallId] = useState("");
   const [callName, setCallName] = useState("New Call");
 
-  const history = useHistory();
 
+  // function to start a call
   const startCallHandler = () => {
     dispatch(
       startCall(`${user.firstName} ${user.lastName}`, callName, socket.id),
@@ -48,6 +44,7 @@ export default function CallStarter({
     });
   };
 
+  // function to join a call
   const joinCallHandler = () => {
     dispatch(
       joinCall(`${user.firstName} ${user.lastName}`, callId, socket.id),
@@ -58,6 +55,7 @@ export default function CallStarter({
 
   return (
     <>
+    {/*Start call card*/}
       <Grid item xs={6}>
         <Card>
           <CardHeader title="Start Call" />
@@ -85,6 +83,8 @@ export default function CallStarter({
           </CardContent>
         </Card>
       </Grid>
+
+    {/*Join call card*/}
       <Grid item xs={6}>
         <Card>
           <CardHeader title="Join Call" />

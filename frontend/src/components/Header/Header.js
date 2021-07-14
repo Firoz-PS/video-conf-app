@@ -1,24 +1,19 @@
 import React, { useState, useContext } from "react";
+
+// material UI
 import {
   AppBar,
   Toolbar,
   IconButton,
-  InputBase,
   Menu,
   MenuItem,
-  Fab,
-  Link,
   Typography,
-  Badge
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
-  MailOutline as MailIcon,
   Person as AccountIcon,
-  Search as SearchIcon,
-  Send as SendIcon,
   ArrowBack as ArrowBackIcon,
-  Settings as SettingsIcon
+  Settings as SettingsIcon,
 } from "@material-ui/icons";
 import classNames from "classnames";
 
@@ -34,54 +29,18 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-// import { useUserDispatch, signOut } from "../../context/UserContext";
 import UserContext from "../../context/AuthContext";
-
-// const messages = [
-//   {
-//     id: 0,
-//     variant: "warning",
-//     name: "Jane Hew",
-//     message: "Hey! How is it going?",
-//     time: "9:32",
-//   },
-//   {
-//     id: 1,
-//     variant: "success",
-//     name: "Lloyd Brown",
-//     message: "Check out my new Dashboard",
-//     time: "9:18",
-//   },
-//   {
-//     id: 2,
-//     variant: "primary",
-//     name: "Mark Winstein",
-//     message: "I want rearrange the appointment",
-//     time: "9:15",
-//   },
-//   {
-//     id: 3,
-//     variant: "secondary",
-//     name: "Liana Dutti",
-//     message: "Good news from sale department",
-//     time: "9:09",
-//   },
-// ];
 
 export default function Header(props) {
   var classes = useStyles();
 
-  // global
+  // global state
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
-  // var userDispatch = useUserDispatch();
   const { userSignOut, user } = useContext(UserContext);
 
-  // local
-  var [mailMenu, setMailMenu] = useState(null);
-  var [isMailsUnread, setIsMailsUnread] = useState(true);
+  // local state
   var [profileMenu, setProfileMenu] = useState(null);
-  var [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -125,7 +84,10 @@ export default function Header(props) {
           aria-controls="profile-menu"
           onClick={(e) => setProfileMenu(e.currentTarget)}
         >
-          <AccountIcon classes={{ root: classes.headerIcon }} />
+          <UserAvatar
+            name={`${user.firstName} ${user.lastName}`}
+            size={`40px`}
+          />{" "}
         </IconButton>
         <Menu
           id="profile-menu"
@@ -151,14 +113,14 @@ export default function Header(props) {
             <AccountIcon className={classes.profileMenuIcon} /> Profile
           </MenuItem>
           <MenuItem
-          to="/app/settings"
-          className={classNames(
-            classes.profileMenuItem,
-            classes.headerMenuItem,
-          )}
-        >
-          <SettingsIcon className={classes.profileMenuIcon} /> Settings
-        </MenuItem>
+            to="/app/settings"
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+          >
+            <SettingsIcon className={classes.profileMenuIcon} /> Settings
+          </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}
