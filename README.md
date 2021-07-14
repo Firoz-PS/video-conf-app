@@ -1,32 +1,23 @@
-<h1><a href="https://ui-lib.com/downloads/matx-react-dashboard/">Matx React Material Design Admin Dashboard Template</a></h1>
+<h1>Microsoft Teams Clone</h1>
 
-<img alt="Matx React Admin" src="https://ui-lib.com/wp-content/uploads/edd/2020/01/marx-react.png" />
+![Screenshot (1535)](https://user-images.githubusercontent.com/67138216/125674023-65d19767-3031-49fd-ab26-0389c96c501f.png)
 
 
-<p>MatX is a full-featured React Material Design Admin Dashboard template. MatX is built with React, Redux & Material UIWe implemented all the features you might need to start a new Web application. The free version includes all Material UI components, Form elements, and validation, JWT authentication, Sign in, sign up pages,  Vertical navigation, Lazy loading, Code splitting, SASS integration.</p>
+<p>Microsoft teams clone is created as a part of Microsft Engage 2021. Through this app you can have a video call with another user, chat in realtime and update your  profile</p>
 
-<h2>Features</h2>
+<h2>Tech Stack</h2>
 <ul>
-  <li>JWT authentication</li>
-  <li>Role based authentication</li>
-  <li>Lazy loading components</li>
-  <li>Code splitting</li>
-  <li>Dashboard Analytics</li>
-  <li>UI kits
+   <li>React.js</li>
+   <li>Node.js</li>
+   <li>Express</li>
+   <li>Mongodb Atlas</li>
+</ul>
+<h2>Tech Stack</h2>
+<ul>
+  <li>User SignIn and SignUp
     <ul>
-      <li>Autocomplete</li>
-      <li>Buttons</li>
-      <li>Checkbox</li>
-      <li>Dialog</li>
-      <li>Expansion panel</li>
-      <li>Menu</li>
-      <li>Progress</li>
-      <li>Datetime picker</li>
-      <li>Radio</li>
-      <li>Switch</li>
-      <li>Slider</li>
-      <li>Snackbar</li>
-      <li>Data table</li>
+      <li>Implemented signIn and signUp using JWT authentication</li>
+      <li>Access token refreshes every 24 hours</li>
     </ul>
   </li>
   <li>Forms
