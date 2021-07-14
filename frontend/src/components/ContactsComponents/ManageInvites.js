@@ -79,7 +79,7 @@ const ManageInvites = () => {
       <CardContent className={classes.content}>
         <Tabs
           value={activeTabId}
-          onChange={(id) => setActiveTabId(id)}
+          onChange={(e,id) => setActiveTabId(id)}
           indicatorColor="primary"
           textColor="primary"
           centered

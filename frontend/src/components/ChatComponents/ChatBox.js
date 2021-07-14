@@ -69,11 +69,6 @@ const ChatBox = () => {
     });
   });
 
-  // function to initiate scrolling to the bottom of a chat
-  useEffect(() => {
-    scrollToBottom();
-  }, [ChatContent, scrollToBottom]);
-
   // function to scroll to the bootom of the chats
   const scrollToBottom = useCallback(() => {
     if (chatBottomRef) {
@@ -83,6 +78,11 @@ const ChatBox = () => {
       });
     }
   }, [chatBottomRef]);
+
+  // function to initiate scrolling to the bottom of a chat
+  useEffect(() => {
+    scrollToBottom();
+  }, [ChatContent, scrollToBottom]);
 
   // function to send a message
   const sendMessageOnEnter = (event) => {
