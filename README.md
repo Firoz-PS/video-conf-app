@@ -2,6 +2,7 @@
 
 <p>Microsoft teams clone is created as a part of Microsft Engage 2021. Through this app you can have a video call with another user, chat in realtime and update your  profile</p>
 
+<br/>
 ![Screenshot (1535)](https://user-images.githubusercontent.com/67138216/125674023-65d19767-3031-49fd-ab26-0389c96c501f.png)
 
 <h2>Tech Stack</h2>
@@ -49,25 +50,24 @@
   <li>Delete Account</li>
 </ul>
 
-<h2 id="availablescripts">Getting started</h2>
+<h2>Getting started</h2>
+<ol>
+   <li> In the project directory, run <code>npm install</code> to install all the dependencies. If it doesn't install all the dependencies, then you may have to install all the           dependencies one by one </li>
+   <li> Now run, <code>nodemon start</code> to start the node.js development server. It will start at <a href="http://localhost:3000">http://localhost:5000</a></li>
+   <li> Now move forward to the "<b>frontend</b>" directory and run <code>npm install</code> to install all the dependencies<li>
+   <li> Now run, <code>npm start</code> to start the React.js app It will start at <a href="http://localhost:3000">http://localhost:3000</a></li>
+   <li> You can start using the app by signing in using the following credentials
+      <ul>
+         <li> Email: admin@teamsclone.com</li>
+         <li> Password: 123</li>
+      </ul>
+   </li>
+</ol>
 
-<p>In the project directory, you can run:</p>
-
-<h3 id="npmstart"><code>npm start</code></h3>
-
-<p>Runs the app in the development mode.<br>
-Open <a href="http://localhost:3000">http://localhost:3000</a> to view it in the browser.</p>
-
-<p>The page will reload if you make edits.<br>
-You will also see any lint errors in the console.</p>
-
-<h3 id="npmrunbuild"><code>npm run build</code></h3>
-
-<p>Builds the app for production to the <code>build</code> folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.</p>
-
-<p>The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!</p>
+<h2>Problems You May Encounter</h2>
+<ul>
+   <li>After signing in or signing up, if you find the username in the top right corner as "undefined", just reload the page. It will sort out that issue</li>
+</ul>
 
 <h3>Video Demo</h3>
 Watch a video demo by clicking <a href="https://youtu.be/gMYKnYnV6kA">here</a>
