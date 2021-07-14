@@ -3,6 +3,7 @@
 <p>Microsoft teams clone is created as a part of Microsft Engage 2021. Through this app you can have a video call with another user, chat in realtime and update your  profile</p>
 
 <br/>
+
 ![Screenshot (1535)](https://user-images.githubusercontent.com/67138216/125674023-65d19767-3031-49fd-ab26-0389c96c501f.png)
 
 <h2>Tech Stack</h2>
@@ -54,7 +55,7 @@
 <ol>
    <li> In the project directory, run <code>npm install</code> to install all the dependencies. If it doesn't install all the dependencies, then you may have to install all the           dependencies one by one </li>
    <li> Now run, <code>nodemon start</code> to start the node.js development server. It will start at <a href="http://localhost:3000">http://localhost:5000</a></li>
-   <li> Now move forward to the "<b>frontend</b>" directory and run <code>npm install</code> to install all the dependencies<li>
+   <li> Now move forward to the "<b>frontend</b>" directory and run <code>npm install</code> to install all the dependencies</li>
    <li> Now run, <code>npm start</code> to start the React.js app It will start at <a href="http://localhost:3000">http://localhost:3000</a></li>
    <li> You can start using the app by signing in using the following credentials
       <ul>
