@@ -1,121 +1,75 @@
-<h1><a href="https://ui-lib.com/downloads/matx-react-dashboard/">Matx React Material Design Admin Dashboard Template</a></h1>
+<h1>Microsoft Teams Clone</h1>
 
-<img alt="Matx React Admin" src="https://ui-lib.com/wp-content/uploads/edd/2020/01/marx-react.png" />
+<p>Microsoft teams clone is created as a part of Microsft Engage 2021. Through this app you can have a video call with another user, chat in realtime and update your  profile</p>
 
+<br/>
 
-<p>MatX is a full-featured React Material Design Admin Dashboard template. MatX is built with React, Redux & Material UIWe implemented all the features you might need to start a new Web application. The free version includes all Material UI components, Form elements, and validation, JWT authentication, Sign in, sign up pages,  Vertical navigation, Lazy loading, Code splitting, SASS integration.</p>
+![Screenshot (1535)](https://user-images.githubusercontent.com/67138216/125674023-65d19767-3031-49fd-ab26-0389c96c501f.png)
 
+<h2>Tech Stack</h2>
+<ul>
+   <li>React.js</li>
+   <li>Node.js</li>
+   <li>Express</li>
+   <li>Mongodb Atlas</li>
+   <li>WebRTC</li>
+   <li>Socket.io</li>
+</ul>
 <h2>Features</h2>
 <ul>
-  <li>JWT authentication</li>
-  <li>Role based authentication</li>
-  <li>Lazy loading components</li>
-  <li>Code splitting</li>
-  <li>Dashboard Analytics</li>
-  <li>UI kits
+  <li>User SignIn and SignUp
     <ul>
-      <li>Autocomplete</li>
-      <li>Buttons</li>
-      <li>Checkbox</li>
-      <li>Dialog</li>
-      <li>Expansion panel</li>
-      <li>Menu</li>
-      <li>Progress</li>
-      <li>Datetime picker</li>
-      <li>Radio</li>
-      <li>Switch</li>
-      <li>Slider</li>
-      <li>Snackbar</li>
-      <li>Data table</li>
+      <li>Implemented signIn, signUp and signOut with JWT authentication</li>
+      <li>Access token refreshes every 24 hours</li>
     </ul>
   </li>
-  <li>Forms
+  <li>Video Conferencing
     <ul>
-      <li>Basic</li>
-      <li>Rich text editor</li>
+      <li>One to one live video calls</li>
+      <li>Mute or unmute mic and video turn on or turn off</li>
+      <li>Chat during meeting</li>
     </ul>
   </li>
-  <li>eChart</li>
-  <li>Session pages
+  <li>Chat Box
     <ul>
-      <li>Sign in</li>
-      <li>Sign up</li>
-      <li>Forgot password</li>
-      <li>Error page</li>
+      <li>Real time chat, where a user can send and recive messages from another user</li>
     </ul>
   </li>
-  <li>Drag and drop</li>
-  <li>Google map</li>
-  <li>Utilities
+  <li>Contacts Management
     <ul>
-      <li>Color</li>
-      <li>Spacing</li>
-      <li>Typography</li>
-      <li>Display</li>
+      <li>View users added to the contacts</li>
+      <li>Send or receive invites</li>
+      <li>View user details</li>
     </ul>
   </li>
-  <li>Multi level menu</li>
+  <li>User Details Updation
+    <ul>
+      <li>Update or add more details which were not collected while signing up</li>
+    </ul>
+  </li> 
+  <li>Change Password</li>
+  <li>Delete Account</li>
 </ul>
 
-<h2>Pro features</h2>
+<h2>Getting started</h2>
+<ol>
+   <li> In the project directory, run <code>npm install</code> to install all the dependencies. If it doesn't install all the dependencies, then you may have to install all the           dependencies one by one </li>
+   <li> Now run, <code>nodemon start</code> to start the node.js development server. It will start at <a href="http://localhost:3000">http://localhost:5000</a></li>
+   <li> Now move forward to the "<b>frontend</b>" directory and run <code>npm install</code> to install all the dependencies</li>
+   <li> Now run, <code>npm start</code> to start the React.js app It will start at <a href="http://localhost:3000">http://localhost:3000</a></li>
+   <li> You can start using the app by signing in using the following credentials
+      <ul>
+         <li> Email: admin@teamsclone.com</li>
+         <li> Password: 123</li>
+      </ul>
+   </li>
+</ol>
+
+<h2>Problems You May Encounter</h2>
 <ul>
-  <li>Horizontal navigation</li>
-  <li>Forms
-    <ul>
-      <li>Single upload</li>
-      <li>Multiple upload</li>
-      <li>Wizard</li>
-    </ul>
-  </li>
-  <li>Working Apps
-    <ul>
-      <li>CRUD table</li>
-      <li>Shop/eCommerce</li>
-      <li>Scrum board</li>
-      <li>Infinite list</li>
-      <li>Invoice builder</li>
-      <li>Event calendar</li>
-      <li>Chat</li>
-      <li>Inbox</li>
-      <li>Todo</li>
-    </ul>
-  </li>
-  <li>Charts
-    <ul>
-      <li>eChart</li>
-      <li>Rechart</li>
-      <li>Victory chart</li>
-      <li>React vis</li>
-    </ul>
-  </li>
- 
-
-  <li>User profile</li>
-  <li>Plans & pricing</li>
-  <li>Support</li>
+   <li>After signing in or signing up, if you find the username in the top right corner as "undefined", just reload the page. It will sort out that issue</li>
 </ul>
 
-<h2 id="availablescripts">Getting started</h2>
+<h3>Video Demo</h3>
+Watch a video demo by clicking <a href="https://youtu.be/gMYKnYnV6kA">here</a>
 
-<p>In the project directory, you can run:</p>
-
-<h3 id="npmstart"><code>npm start</code></h3>
-
-<p>Runs the app in the development mode.<br>
-Open <a href="http://localhost:3000">http://localhost:3000</a> to view it in the browser.</p>
-
-<p>The page will reload if you make edits.<br>
-You will also see any lint errors in the console.</p>
-
-<h3 id="npmrunbuild"><code>npm run build</code></h3>
-
-<p>Builds the app for production to the <code>build</code> folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.</p>
-
-<p>The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!</p>
-
-<h3>Download</h3>
-Download From <a href="https://ui-lib.com/downloads/matx-react-dashboard/">official website</a>
-
-<h3>For questions and support mail us at <a href="mailto:support@ui-lib.com">support@ui-lib.com</a></h3>
