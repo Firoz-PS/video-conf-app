@@ -38,8 +38,8 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 // context
-import UserContext from "../../context/AuthContext";
-import { socket } from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
+import { socket } from "../../context/UserContext";
 
 // styles
 import useStyles from "./styles";

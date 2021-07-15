@@ -4,7 +4,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/styles";
 import { CssBaseline } from "@material-ui/core";
 import { LayoutProvider } from "./context/LayoutContext";
-import { UserProvider } from "./context/AuthContext";
+import { UserProvider } from "./context/UserContext";
 import Themes from "./themes";
 import App from "./App";
 import { Store } from "./redux/Store";

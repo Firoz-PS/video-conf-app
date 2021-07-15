@@ -66,7 +66,6 @@ const signup = async(req, res) => {
     expiresIn: 86400 // 24 hours
   });  
   user.accessToken = token;
-
   user.save()
     .then(
       res.status(200).send({
@@ -179,7 +178,7 @@ const fetchUser = (req, res) =>{
     })
     .catch(err => {
       res.status(404).send({ message: "User Not found." });
-      console.log("here",err)
+      console.log(err)
     })
   }
   
@@ -247,24 +246,7 @@ const signout = (req, res) => {
 const updateUser = (req, res) => {
   const UPDATE_CASE = req.params.updatefield
 
-// need to implement a check for whether the user is deleted
-
   switch(UPDATE_CASE) {
-    case "THEME": 
-      User.findById(req.params.id)
-        .then(user => {
-          user.theme = req.body.theme;
-          user.color = req.body.color;
-          user.save()
-            .then(
-              res.status(200).send({message: "user updated successfully"})
-            )
-            .catch(err =>{
-              res.status(500).send({message: "failed to update user"})
-              console.log(err)
-            })
-        })
-        break;
 
     case "BASIC": 
       User.findById(req.userId)
@@ -286,29 +268,7 @@ const updateUser = (req, res) => {
               console.log(err)
             })
         })
-        break;
-
-    // case "CONTACT": 
-    //   User.findById(req.params.id)
-    //     .then(user => {
-    //       user.contactInfos.push({
-    //         contactId: req.body.contactId,
-    //         chatId: req.body.chatId,
-    //         contactName: req.body.contactName,
-    //         contactAvatar: req.body.contactAvatar,
-    //         isContactOnline: req.body.isContactOnline ,
-    //         lastChatTime: req.body.lastChatTime         
-    //       })
-    //       user.save()
-    //         .then(
-    //           res.status(200).send({message: "user contacts updated successfully"})
-    //         )
-    //         .catch(err =>{
-    //           res.status(500).send({message: "failed to update user contacts"})
-    //           console.log(err)
-    //         })
-    //     })
-    //     break;    
+        break;  
 
     case "PASSWORD": 
       User.findById(req.userId)
@@ -338,30 +298,6 @@ const updateUser = (req, res) => {
         res.status(400).send({message: "invalid update field"})
         
   }
-}
-
-// function after uploading avatar
-const updateAvatar = (req, res) => {
-  const img = fs.readFileSync(req.file.path);
-  const encode_img = img.toString('base64');
-  User.findById(req.userId)
-  .then(user => {
-    user.avatar = {
-      contentType: req.file.mimetype,
-      image: new Buffer(encode_img,'base64')
-    };
-    user.save()
-      .then(
-        res.status(200).send({message: "Avatar uploaded successfully"})
-        // console.log(result.img.Buffer)
-        // res.contentType(final_img.contentType);
-        // res.send(final_img.image);
-      )
-      .catch(err =>{
-        res.status(500).send({message: "failed to upload avatar"})
-        console.log(err)
-      })
-  })  
 }
 
 // function to delete the user
@@ -405,6 +341,5 @@ module.exports = {
   fetchUser,
   fetchProfile,
   updateUser,
-  updateAvatar,
   deleteUser
 }

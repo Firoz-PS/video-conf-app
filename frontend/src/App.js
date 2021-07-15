@@ -8,7 +8,7 @@ import Layout from "./components/Layout/Layout";
 import Login from "./pages/Login/Login";
 
 // context
-import UserContext from "./context/AuthContext";
+import UserContext from "./context/UserContext";
 
 export default function App() {
   const { isAuthenticated, user } = useContext(UserContext);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSnackbar } from "notistack";
 
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../config/config";
 
 const showSnackbar = () => () => {
   const { enqueueSnackbar } = useSnackbar();

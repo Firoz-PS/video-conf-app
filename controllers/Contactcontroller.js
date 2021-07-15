@@ -10,7 +10,6 @@ const initContact = async () => {
     invitesReceived: [],
   });
   await contact.save();
-
   if (contact.id) {
     return contact.id;
   } else {
@@ -55,7 +54,7 @@ const addContact = async (req, res) => {
   const chatContentId = await initChat();
   const contactInfosId = await getContactInfosId(req.body.userId);
   Contact.findById(req.params.id)
-    .then((myContact) => {
+    .then(async (myContact) => {
       const newContact = {
         userId: req.body.userId,
         chatId: chatContentId,
@@ -63,8 +62,8 @@ const addContact = async (req, res) => {
         userAvatar: req.body.avatar,
         lastChatTime: "",
       };
-      myContact.contacts.push(newContact);
-      if(req.body.type == "fromInvites"){
+      if (req.body.type == "fromInvites") {
+        myContact.contacts.push(newContact);
         myContact.invitesReceived.splice(
           myContact.invitesReceived.findIndex(
             (item) => item.userId === req.body.userId
@@ -72,11 +71,17 @@ const addContact = async (req, res) => {
           1
         );
       }
+      else if (req.body.type == "fromCall") {
+        isContact = await isUserAContact(req.params.id, req.body.userId)
+        if(!isContact){
+          myContact.contacts.push(newContact);
+        } 
+      }
       myContact
         .save()
         .then(
           Contact.findById(contactInfosId)
-            .then((theirContact) => {
+            .then(async (theirContact) => {
               const newContact = {
                 userId: req.userId,
                 chatId: chatContentId,
@@ -84,14 +89,20 @@ const addContact = async (req, res) => {
                 userAvatar: req.body.myAvatar,
                 lastChatTime: "",
               };
-              theirContact.contacts.push(newContact);
-              if(req.body.type == "fromInvites"){
+              if (req.body.type == "fromInvites") {
+                theirContact.contacts.push(newContact);
                 theirContact.invitesSent.splice(
                   theirContact.invitesSent.findIndex(
                     (item) => item.userId === req.userId
                   ),
                   1
                 );
+              }
+              else if (req.body.type == "fromCall") {
+                isContact = await isUserAContact(contactInfosId, req.userId)
+                if(!isContact){
+                  theirContact.contacts.push(newContact);
+                } 
               }
               theirContact
                 .save()
@@ -182,69 +193,6 @@ const addInvite = async (req, res) => {
     });
 };
 
-// // function to add a new invite sent
-// const addInviteSent = async(req, res) => {
-//   Contact.findById(req.params.id)
-//     .then((contact) => {
-//       const newInvite = {
-//         userId: req.body.userId,
-//         userName: req.body.userName,
-//         userAvatar: req.body.avatar,
-//       };
-//       contact.invitesSent.push(newInvite);
-//       const contactInfosId = await getContactInfosId(req.body.userId);
-//       addInviteReceived(contactInfosId, req.userId, req.body.myName, req.Body.myAvatar)
-//       contact.save()
-//         .then(() => {
-//           res.status(200).send({
-//             message: "Invite sent added Successfully",
-//             invitesSent: contact.invitesSent,
-//           })
-//         }
-//         )
-//         .catch((err) => {
-//           res.status(500).send({ message: "failed to add the invite sent" });
-//           console.log(err);
-//         });
-//     })
-//     .catch((err) => {
-//       res.status(404).send({ message: "Contact List not found" });
-//       console.log(err);
-//     });
-// };
-
-// // function to add a new invite received
-// const addInviteReceived = async (req, res) => {
-//   Contact.findById(req.params.id)
-//     .then((contact) => {
-//       const newInvite = {
-//         userId: req.body.userId,
-//         userName: req.body.userName,
-//         userAvatar: req.body.avatar,
-//       };
-//       contact.invitesReceived.push(newInvite);
-//       contact
-//         .save()
-//         .then(() => {
-//           res.status(200).send({
-//             message: "Invite received added Successfully",
-//             invitesReceived: contact.invitesReceived,
-//           })
-//         }
-//         )
-//         .catch((err) => {
-//           res
-//             .status(500)
-//             .send({ message: "failed to add the invite received" });
-//           console.log(err);
-//         });
-//     })
-//     .catch((err) => {
-//       res.status(404).send({ message: "Contact List not found" });
-//       console.log(err);
-//     });
-// };
-
 // function to remove a contact
 const removeContact = async (req, res) => {
   const contactInfosId = await getContactInfosId(req.body.userId);
@@ -263,38 +211,34 @@ const removeContact = async (req, res) => {
           .then(
             Contact.findById(contactInfosId)
               .then((theirContact) => {
-                const initialTheirContactLength =
-                  theirContact.contacts.length;
+                const initialTheirContactLength = theirContact.contacts.length;
                 theirContact.contacts.splice(
                   theirContact.contacts.findIndex(
                     (person) => person.userId === req.body.userId
                   ),
                   1
                 );
-                if (
-                  theirContact.contacts.length != initialTheirContactLength
-                ) {
-                  theirContact.save().then(() => {
-                    res.status(200).send({
-                      message: "Successfully removed the Invite Sent",
-                      contacts: myContact.contacts,
-                    })
-                  })
-                  .catch((err) => {
-                    res
-                      .status(500)
-                      .send({
-                        message: "failed to save the removed contacts List of other user",
+                if (theirContact.contacts.length != initialTheirContactLength) {
+                  theirContact
+                    .save()
+                    .then(() => {
+                      res.status(200).send({
+                        message: "Successfully removed the Invite Sent",
+                        contacts: myContact.contacts,
                       });
-                    console.log(err);
-                  });
-                } else {
-                  res
-                    .status(500)
-                    .send({
-                      message:
-                        "Person is not removed from the contacts List of other user",
+                    })
+                    .catch((err) => {
+                      res.status(500).send({
+                        message:
+                          "failed to save the removed contacts List of other user",
+                      });
+                      console.log(err);
                     });
+                } else {
+                  res.status(500).send({
+                    message:
+                      "Person is not removed from the contacts List of other user",
+                  });
                   console.log(err);
                 }
               })
@@ -306,19 +250,15 @@ const removeContact = async (req, res) => {
               })
           )
           .catch((err) => {
-            res
-              .status(500)
-              .send({
-                message: "failed to save the removed contacts List",
-              });
+            res.status(500).send({
+              message: "failed to save the removed contacts List",
+            });
             console.log(err);
           });
       } else {
-        res
-          .status(500)
-          .send({
-            message: "Person is not removed from the contacts list",
-          });
+        res.status(500).send({
+          message: "Person is not removed from the contacts list",
+        });
         console.log(err);
       }
     })
@@ -327,32 +267,6 @@ const removeContact = async (req, res) => {
       console.log(err);
     });
 };
-
-// function to remove an invite sent
-// const removeInviteSent = (req, res) => {
-//   Contact.findById(req.params.id)
-//     .then((contact) => {
-//       const initialLength = contact.invitesSent.length;
-//       contact.invitesSent.splice(
-//         contact.invitesSent.findIndex(
-//           (person) => person.userId === req.body.contactUserId
-//         ),
-//         1
-//       );
-//       contact.save();
-//       if (contact.invitesSent.length != initialLength) {
-//         res.status(200).send({
-//           message: "Successfully removed the invite sent",
-//         });
-//       } else {
-//         res.status(404).send({ message: "Person not found" });
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(404).send({ message: "Contact List not found" });
-//       console.log(err);
-//     });
-// };
 
 // function to remove an invite sent
 const removeInviteSent = async (req, res) => {
@@ -381,29 +295,29 @@ const removeInviteSent = async (req, res) => {
                   1
                 );
                 if (
-                  theirContact.invitesReceived.length != initialTheirContactLength
+                  theirContact.invitesReceived.length !=
+                  initialTheirContactLength
                 ) {
-                  theirContact.save().then(() => {
-                    res.status(200).send({
-                      message: "Successfully removed the Invite Sent",
-                      invitesSent: myContact.invitesSent,
-                    })
-                  })
-                  .catch((err) => {
-                    res
-                      .status(500)
-                      .send({
-                        message: "failed to save the removed invitesReceived List",
+                  theirContact
+                    .save()
+                    .then(() => {
+                      res.status(200).send({
+                        message: "Successfully removed the Invite Sent",
+                        invitesSent: myContact.invitesSent,
                       });
-                    console.log(err);
-                  });
-                } else {
-                  res
-                    .status(500)
-                    .send({
-                      message:
-                        "Person is not removed from the invitesReceived list",
+                    })
+                    .catch((err) => {
+                      res.status(500).send({
+                        message:
+                          "failed to save the removed invitesReceived List",
+                      });
+                      console.log(err);
                     });
+                } else {
+                  res.status(500).send({
+                    message:
+                      "Person is not removed from the invitesReceived list",
+                  });
                   console.log(err);
                 }
               })
@@ -415,19 +329,15 @@ const removeInviteSent = async (req, res) => {
               })
           )
           .catch((err) => {
-            res
-              .status(500)
-              .send({
-                message: "failed to save the removed invitesSent List",
-              });
+            res.status(500).send({
+              message: "failed to save the removed invitesSent List",
+            });
             console.log(err);
           });
       } else {
-        res
-          .status(500)
-          .send({
-            message: "Person is not removed from the invitesSent list",
-          });
+        res.status(500).send({
+          message: "Person is not removed from the invitesSent list",
+        });
         console.log(err);
       }
     })
@@ -466,27 +376,24 @@ const removeInviteReceived = async (req, res) => {
                 if (
                   theirContact.invitesSent.length != initialTheirContactLength
                 ) {
-                  theirContact.save().then(() => {
-                    res.status(200).send({
-                      message: "Successfully removed the Invite Received",
-                      invitesReceived: myContact.invitesReceived,
-                    });
-                  })
-                  .catch((err) => {
-                    res
-                      .status(500)
-                      .send({
+                  theirContact
+                    .save()
+                    .then(() => {
+                      res.status(200).send({
+                        message: "Successfully removed the Invite Received",
+                        invitesReceived: myContact.invitesReceived,
+                      });
+                    })
+                    .catch((err) => {
+                      res.status(500).send({
                         message: "failed to save the removed invitesSent List",
                       });
-                    console.log(err);
-                  });
-                } else {
-                  res
-                    .status(500)
-                    .send({
-                      message:
-                        "Person is not removed from the invitesSent list",
+                      console.log(err);
                     });
+                } else {
+                  res.status(500).send({
+                    message: "Person is not removed from the invitesSent list",
+                  });
                   console.log(err);
                 }
               })
@@ -498,19 +405,15 @@ const removeInviteReceived = async (req, res) => {
               })
           )
           .catch((err) => {
-            res
-              .status(500)
-              .send({
-                message: "failed to save the removed invitesReceived List",
-              });
+            res.status(500).send({
+              message: "failed to save the removed invitesReceived List",
+            });
             console.log(err);
           });
       } else {
-        res
-          .status(500)
-          .send({
-            message: "Person is not removed from the invitesReceived list",
-          });
+        res.status(500).send({
+          message: "Person is not removed from the invitesReceived list",
+        });
         console.log(err);
       }
     })
@@ -525,8 +428,6 @@ module.exports = {
   isUserAContact,
   fetchContactInfo,
   addContact,
-  // addInviteSent,
-  // addInviteReceived,
   removeContact,
   removeInviteSent,
   removeInviteReceived,

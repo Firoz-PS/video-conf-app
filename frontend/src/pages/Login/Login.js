@@ -14,7 +14,7 @@ import { withRouter } from "react-router-dom";
 import useStyles from "./styles";
 
 // context
-import UserContext from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
 
 function Login(props) {
   var classes = useStyles();
@@ -43,7 +43,6 @@ function Login(props) {
         signupEmailValue,
         signupPasswordValue,
         props.history,
-        setIsLoading,
       ).then(() => {
         setIsLoading(false);
       });
@@ -57,7 +56,6 @@ function Login(props) {
       loginEmailValue,
       loginPasswordValue,
       props.history,
-      setIsLoading,
     ).then(() => {
       setIsLoading(true)
     })

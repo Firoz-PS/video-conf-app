@@ -29,7 +29,7 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-import UserContext from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
 
 export default function Header(props) {
   var classes = useStyles();

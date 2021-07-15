@@ -23,8 +23,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchChatDetails, sendMessage } from "../../redux/actions/ChatActions";
 
 // context
-import UserContext from "../../context/AuthContext";
-import { socket } from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
+import { socket } from "../../context/UserContext";
 
 // styles
 import useStyles from "./styles";

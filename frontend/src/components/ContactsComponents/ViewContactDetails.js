@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 // contexts
-import UserContext from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -27,7 +27,7 @@ import useStyles from "./styles";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
 // context
-import { socket } from "../../context/AuthContext";
+import { socket } from "../../context/UserContext";
 
 const ViewContactDetails = () => {
   const classes = useStyles();

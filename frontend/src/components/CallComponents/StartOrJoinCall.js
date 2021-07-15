@@ -19,8 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { startCall, joinCall } from "../../redux/actions/CallActions";
 
 // context
-import { socket } from "../../context/AuthContext";
-import UserContext from "../../context/AuthContext";
+import { socket } from "../../context/UserContext";
+import UserContext from "../../context/UserContext";
 
 export default function CallStarter() {
   const dispatch = useDispatch();

@@ -37,8 +37,8 @@ import {
 } from "../../redux/actions/ContactActions";
 
 // context
-import UserContext from "../../context/AuthContext";
-import { socket } from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
+import { socket } from "../../context/UserContext";
 
 // component
 import UserAvatar from "../UserAvatar/UserAvatar";

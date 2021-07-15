@@ -23,7 +23,7 @@ import {
   VideocamOff,
   CallEnd,
   Chat,
-  FileCopy
+  FileCopy,
 } from "@material-ui/icons";
 
 // redux
@@ -36,23 +36,21 @@ import {
 import {
   addContact,
   selectContact,
-  fetchContactInfo
+  fetchContactInfo,
 } from "../../redux/actions/ContactActions";
 
 // Peer.js
 import Peer from "simple-peer";
 
 // context
-import UserContext from "../../context/AuthContext";
-import { socket } from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
+import { socket } from "../../context/UserContext";
 
 // styles
 import useStyles from "./styles";
 
 // components
 import ChatBox from "../ChatComponents/ChatBox";
-
-
 
 const LiveCall = () => {
   const classes = useStyles();
@@ -73,7 +71,7 @@ const LiveCall = () => {
   const [mic, setMic] = useState(true);
   const [video, setVideo] = useState(true);
   const [userName, setUserName] = useState(null);
-  const [otherUserId, setOtherUserId] = useState(null)
+  const [otherUserId, setOtherUserId] = useState(null);
 
   const myVideo = useRef();
   const userVideo = useRef();
@@ -84,11 +82,10 @@ const LiveCall = () => {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-  // function to update the contactslist when a user calls 
+  // function to update the contactslist when a user calls
   useEffect(() => {
     socket.on("updateContact", () => {
-      dispatch(fetchContactInfo(user.contactInfosId)).then(() => {
-      });
+      dispatch(fetchContactInfo(user.contactInfosId)).then(() => {});
     });
   });
 
@@ -101,25 +98,31 @@ const LiveCall = () => {
         myVideo.current.srcObject = currentStream;
       });
 
-    socket.on("callUser", ({ from, myName, signal, myUserId }) => {
-      setCall({ isReceivingCall: true, from, myName, signal, myUserId });
+    socket.on("callUser", ({ from, myName, signal, myUserId, myAvatar }) => {
+      setCall({
+        isReceivingCall: true,
+        from,
+        myName,
+        signal,
+        myUserId,
+        myAvatar,
+      });
     });
   }, []);
 
   // function to call a user, it will execute only for the user 'joining' the call and not for the one who 'starts'
   useEffect(() => {
-    if(CallList[0].participants[1]){
+    if (CallList[0].participants[1]) {
       callUser(CallList[0].participants[0].userSocketId);
     }
-  }, [stream])
+  }, [stream]);
 
   // function to toggle the open status of chat box
   const toggleDrawerOpen = () => {
-    if(otherUserId){
-      dispatch(selectContact(otherUserId))
-    }
-    else {
-      dispatch(selectContact(call.myUserId))
+    if (otherUserId) {
+      dispatch(selectContact(otherUserId));
+    } else {
+      dispatch(selectContact(call.myUserId));
     }
     setDrawerOpen(!drawerOpen);
   };
@@ -132,7 +135,7 @@ const LiveCall = () => {
 
   // function to turn on or off the video
   const playStop = () => {
-    setVideo(!video)
+    setVideo(!video);
     myVideo.current.srcObject.getVideoTracks()[0].enabled = !video;
   };
 
@@ -161,13 +164,27 @@ const LiveCall = () => {
     setCallAccepted(true);
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
+    dispatch(
+      addContact(
+        user.contactInfosId,
+        call.myUserId,
+        call.myName,
+        call.myAvatar,
+        `${user.firstName} ${user.lastName}`,
+        user.avatar,
+        "fromCall",
+      ),
+    ).then(() => {
+      socket.emit("contactListUpdated");
+    });
+
     peer.on("signal", (data) => {
       socket.emit("answerCall", {
         signal: data,
         to: call.from,
         myName: `${user.firstName} ${user.lastName}`,
         myId: user.id,
-        myAvatar: user.avatar
+        myAvatar: user.avatar,
       });
     });
 
@@ -191,6 +208,7 @@ const LiveCall = () => {
         from: socket.id,
         myName: `${user.firstName} ${user.lastName}`,
         myUserId: user.id,
+        myAvatar: user.avatar,
       });
     });
 
@@ -202,23 +220,12 @@ const LiveCall = () => {
       setCallAccepted(true);
       setUserName(myName);
       peer.signal(signal);
-      dispatch(addContact(
-        user.contactInfosId,
-        myId,
-        myName,
-        myAvatar,
-        `${user.firstName} ${user.lastName}`,
-        user.avatar,
-        "fromCall"
-        ))
-        setOtherUserId(myId)
-        socket.emit("contactListUpdated")
+      setOtherUserId(myId);
     });
 
     socket.on("callRejected", () => {
-      setCallAccepted(true);
-      dispatch(removeMeFromParticipants(user.id)
-    );
+      setCallRejected(true);
+      dispatch(removeMeFromParticipants(user.id));
     });
 
     connectionRef.current = peer;
@@ -227,7 +234,9 @@ const LiveCall = () => {
   // function to leave a call
   const leaveCall = () => {
     setCallEnded(true);
-    { connectionRef.ref && connectionRef.current.destroy() }
+    {
+      connectionRef.ref && connectionRef.current.destroy();
+    }
     history.push("/app/call/");
   };
 
@@ -241,8 +250,7 @@ const LiveCall = () => {
           alignItems="stretch"
           className={classes.callPanel}
         >
-
-        {/*The video of the User plays here once the stream is set*/}
+          {/*The video of the User plays here once the stream is set*/}
           {stream && (
             <Grid item xs={12} md={6}>
               <Paper className={classes.Paper}>
@@ -308,14 +316,18 @@ const LiveCall = () => {
           {/*toolbar at the bottom containing all the tools available in the call*/}
           <Grid item xs={12}>
             <Paper className={classes.callBottomBar} justify="center">
-            <IconButton onClick={() => {navigator.clipboard.writeText(CallList[0]._id)}}>
-            <FileCopy />
-          </IconButton>
+              <IconButton
+                onClick={() => {
+                  navigator.clipboard.writeText(CallList[0]._id);
+                }}
+              >
+                <FileCopy />
+              </IconButton>
               <IconButton onClick={muteUnmute}>
-                {mic ? <Mic /> : <MicOff color="secondary"/>}
+                {mic ? <Mic /> : <MicOff color="secondary" />}
               </IconButton>
               <IconButton onClick={playStop}>
-                {video ? <Videocam /> : <VideocamOff color="secondary"/>}
+                {video ? <Videocam /> : <VideocamOff color="secondary" />}
               </IconButton>
               <IconButton onClick={leaveCall} color="secondary">
                 <CallEnd />
@@ -329,12 +341,11 @@ const LiveCall = () => {
       </Grid>
 
       {/*Chat Box Component*/}
-      {drawerOpen && 
+      {drawerOpen && (
         <Grid item xs={3}>
           <ChatBox />
-      </Grid>
-      }
-
+        </Grid>
+      )}
     </>
   );
 };

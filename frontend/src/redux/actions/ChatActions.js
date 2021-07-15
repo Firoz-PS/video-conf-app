@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../config/config";
 
 // function to fetch all the chat details at the beginning
 export const fetchChatDetails = (chatId) => async (dispatch) => {

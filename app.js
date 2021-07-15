@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.get("/", (req, res) => {
 	res.json({ message: "Server Running" });
 });
@@ -43,8 +42,8 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit("updateContact")
 	});
 
-	socket.on("callUser", ({ userToCall, signalData, from, myName, myUserId }) => {
-		io.to(userToCall).emit("callUser", { signal: signalData, from, myName, myUserId });
+	socket.on("callUser", ({ userToCall, signalData, from, myName, myUserId, myAvatar }) => {
+		io.to(userToCall).emit("callUser", { signal: signalData, from, myName, myUserId, myAvatar });
 	});
 
 	socket.on("answerCall", ({to, signal, myName, myId, myAvatar}) => {

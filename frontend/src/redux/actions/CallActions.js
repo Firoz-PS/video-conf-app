@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../config/config";
 
 // function to remove a participant from call list
 export const removeMeFromParticipants = (userId) => (dispatch) => {

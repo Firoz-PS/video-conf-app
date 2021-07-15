@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 // contexts
-import UserContext from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
 
 // styles
 import useStyles from "./styles";

@@ -13,8 +13,6 @@ router.use(function(req, res, next) {
 
 router.get("/:id", [authJwt.verifyToken], ContactController.fetchContactInfo);
 router.put("/addContact/:id", [authJwt.verifyToken], ContactController.addContact);
-// router.put("/addInviteSent/:id", [authJwt.verifyToken], ContactController.addInviteSent);
-// router.put("/addInviteReceived/:id", [authJwt.verifyToken], ContactController.addInviteReceived);
 router.put("/addInvite/:id", [authJwt.verifyToken], ContactController.addInvite);
 router.put("/removeContact/:id", [authJwt.verifyToken], ContactController.removeContact);
 router.put("/removeInviteSent/:id", [authJwt.verifyToken], ContactController.removeInviteSent);
