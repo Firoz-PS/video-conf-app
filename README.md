@@ -70,6 +70,9 @@
    <li>After signing in or signing up, if you find the username in the top right corner as "undefined", just reload the page. It will sort out that issue</li>
 </ul>
 
-<h3>Video Demo</h3>
+<h2>Video Demo</h2>
 Watch a video demo by clicking <a href="https://youtu.be/gMYKnYnV6kA">here</a>
+
+<h2>Documentation</h2>
+Read the project documentation by clicking <a href="https://docs.google.com/document/d/15T9cdanmYqR8_4mNwC_QetqMK5-zMjWMq9UkjOgzkUw/edit?usp=sharing">here</a>
 
